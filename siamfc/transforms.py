@@ -5,7 +5,7 @@ import numpy as np
 import numbers
 import torch
 
-from . import ops
+import ops
 
 
 __all__ = ['SiamFCTransforms']

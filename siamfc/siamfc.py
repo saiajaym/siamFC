@@ -14,12 +14,12 @@ from torch.optim.lr_scheduler import ExponentialLR
 from torch.utils.data import DataLoader
 from got10k.trackers import Tracker
 
-from . import ops
-from .backbones import AlexNetV1
-from .heads import SiamFC
-from .losses import BalancedLoss
-from .datasets import Pair
-from .transforms import SiamFCTransforms
+import ops
+from backbones import AlexNetV1, AlexNetV3
+from heads import SiamFC
+from losses import BalancedLoss
+from datasets import Pair
+from transforms import SiamFCTransforms
 
 
 __all__ = ['TrackerSiamFC']
