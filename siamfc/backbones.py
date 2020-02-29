@@ -141,7 +141,7 @@ class PrimaryCaps(nn.Module):
 
 class SimilarityCaps(nn.Module):
     def __init__(self, num_capsules=2, num_routes=64 * 8 * 8, in_channels=8, out_channels=16):
-        super(DigitCaps, self).__init__()
+        super(SimilarityCaps, self).__init__()
 
         self.in_channels = in_channels
         self.num_routes = num_routes
