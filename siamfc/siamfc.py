@@ -15,8 +15,8 @@ from torch.utils.data import DataLoader
 from got10k.trackers import Tracker
 
 import ops
-from backbones import AlexNetV1, AlexNetV3
-from heads import SiamFC
+from backbones import AlexNetV1, AlexNetV3, CapsuleNetV1
+from heads import SiamFC, SiamFC_V2
 from losses import BalancedLoss
 from datasets import Pair
 from transforms import SiamFCTransforms
@@ -49,9 +49,14 @@ class TrackerSiamFC(Tracker):
         self.device = torch.device('cuda:0' if self.cuda else 'cpu')
 
         # setup model
+        # self.net = Net(
+        #     backbone=AlexNetV1(),
+        #     head=SiamFC(self.cfg.out_scale)
+        # )
         self.net = Net(
-            backbone=AlexNetV1(),
-            head=SiamFC(self.cfg.out_scale))
+            backbone = CapsuleNetV1(),
+            head = SiamFC_V2(self.cfg.out_scale)
+        )
         ops.init_weights(self.net)
         
         # load checkpoint if provided
