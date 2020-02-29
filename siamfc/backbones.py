@@ -24,6 +24,19 @@ class _AlexNet(nn.Module):
         return x
 
 
+class _CapsuleNet(nn.Module):
+    
+    def forward(self, x):
+        x = self.conv1(x)
+        x = self.conv2(x)
+        x = self.conv3(x)
+        x = self.conv4(x)
+        x = self.conv5(x)
+        x = self.primary_capsules(x)
+        x = self.similarity_capsules(x)
+        return x
+
+
 class AlexNetV1(_AlexNet):
     output_stride = 8
 
