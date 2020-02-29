@@ -1,5 +1,6 @@
 from __future__ import absolute_import
 
+import torch
 import torch.nn as nn
 
 
@@ -119,11 +120,11 @@ class AlexNetV3(_AlexNet):
             _BatchNorm2d(512))
 
 class PrimaryCaps(nn.Module):
-    def __init__(self, num_capsules=8, in_channels=256, out_channels=64, kernal_size=9):
+    def __init__(self, num_capsules=8, in_channels=256, out_channels=64, kernel_size=9):
         super(PrimaryCaps, self).__init__()
 
         self.capsules = nn.ModuleList([
-            nn.Conv2d(in_channels=in_channels, out_channels=out_channels, kernal_size=kernal_size, stride=2, padding=0)
+            nn.Conv2d(in_channels=in_channels, out_channels=out_channels, kernel_size=kernel_size, stride=2, padding=0)
             for _ in range(num_capsules)
         ])
 
@@ -178,7 +179,7 @@ class SimilarityCaps(nn.Module):
         output_tensor = squared_norm *  input_tensor / ((1. + squared_norm) * torch.sqrt(squared_norm))
         return output_tensor
 
-class CapsuleNetV1(_AlexNet):
+class CapsuleNetV1(_CapsuleNet):
     output_stride = 8
 
     def __init__(self):
