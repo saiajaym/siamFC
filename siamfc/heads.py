@@ -33,7 +33,7 @@ class SiamFC_V2(nn.Module):
         self.out_scale = out_scale
     
     def forward(self, z, x):
-        # print (z.shape, x.shape)
+        print (z.shape, x.shape)
         return self._fast_xcorr(z, x) * self.out_scale
     
     def _fast_xcorr(self, z, x):

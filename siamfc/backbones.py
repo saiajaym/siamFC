@@ -120,7 +120,7 @@ class AlexNetV3(_AlexNet):
             _BatchNorm2d(512))
 
 class PrimaryCaps(nn.Module):
-    def __init__(self, num_capsules=8, in_channels=256, out_channels=64, kernel_size=9):
+    def __init__(self, num_capsules=8, in_channels=256, out_channels=64, kernel_size=6):
         super(PrimaryCaps, self).__init__()
 
         self.capsules = nn.ModuleList([
@@ -130,6 +130,7 @@ class PrimaryCaps(nn.Module):
 
     def forward(self, x):
         u = [capsule(x) for capsule in self.capsules]
+        print (u[0].shape)
         u = torch.stack(u, dim=1)
         u = u.view(x.size(0), 64 * 8 * 8, -1)
         return self.squash(u)
@@ -140,7 +141,7 @@ class PrimaryCaps(nn.Module):
         return output_tensor
 
 class SimilarityCaps(nn.Module):
-    def __init__(self, num_capsules=2, num_routes=64 * 8 * 8, in_channels=8, out_channels=16):
+    def __init__(self, num_capsules=1, num_routes=64 * 8 * 8, in_channels=8, out_channels=16):
         super(SimilarityCaps, self).__init__()
 
         self.in_channels = in_channels
